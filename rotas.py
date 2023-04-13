@@ -10,7 +10,7 @@ class Rotas():
     for i in range(self.tamanho):
       self.populacao.append(rota.Rota(dados))
 
-  
+  #retorna uma lista com os individuos cruzados da população
   def crossover(self):
     nova_população = []
     
@@ -33,12 +33,13 @@ class Rotas():
       nova_população.append(rota.Rota(self.dados, rota=frankenstein2))
 
     return nova_população
-    
+
   #retorna uma lista com os individuos mutados da população
   def mutacao(self):
     mutados = []
     for individuo in self.populacao:
-      mutados.append(individuo.mutacao())
+      mutado = individuo.mutacao()
+      mutados.append(mutado)
     return mutados
       
   #retorna o fitness do melhor individuo da população e o objeto do individuo
@@ -49,6 +50,15 @@ class Rotas():
   #seleciona os 10 melhores individuos da população
   def selecionar(self, populacao1, populacao2):
     self.populacao = self.populacao + populacao1 + populacao2
+    
+
+    # for item in self.populacao:
+    #   if item.fitness_val != float('-inf') and item.rota[0] != 'Escondidos':
+    #     print(item.rota)
+    #     print(item.fitness_val)
+    #     print(" ")
+        
+    
     lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
     self.populacao = lista_ordenada[:10]
     
@@ -61,5 +71,6 @@ class Rotas():
   
   def top_individuo(self):
     lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
-    return lista_ordenada[0]
+    return lista_ordenada[0].fitness_val
+  
 

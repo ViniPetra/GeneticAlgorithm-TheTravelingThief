@@ -34,6 +34,11 @@ class Rota():
 
         if rota[0] != "Escondidos":
             return float('-inf')
+        
+        #Verificar se há cidades repetidas na rota sem contar a primeira
+        temp_arr = rota[1:]
+        if len(temp_arr) != len(set(temp_arr)):
+            return float('-inf')
 
         for i in range(len(rota)):
             #Verificar as restrições antes para economizar processamento
@@ -57,10 +62,10 @@ class Rota():
                 except KeyError: 
                     return float('-inf') # Retorna -inf caso a rota não seja válida
     
-    #muda aleatoriamente a ordem de duas cidades
+    #muda aleatoriamente a ordem de duas cidades com exceção da primeira
     def mutacao(self):
-        rota_mutada = self.rota
-        cidades = self.dados.cidades
-        randon_list = random.sample(range(len(cidades)), 2)
-        rota_mutada[randon_list[0]], rota_mutada[randon_list[1]] = rota_mutada[randon_list[1]], rota_mutada[randon_list[0]]
-        return Rota(self.dados, rota=rota_mutada)
+        rota = self.rota
+        randon_list = random.sample(range(1, len(rota)), 2)
+        rota[randon_list[0]], rota[randon_list[1]] = rota[randon_list[1]], rota[randon_list[0]]
+        return Rota(self.dados, rota)
+        

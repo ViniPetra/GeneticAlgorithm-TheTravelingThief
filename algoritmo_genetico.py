@@ -1,4 +1,4 @@
-GERACOES_MAX = 100000
+GERACOES_MAX = 100000000
 ERRO_MIN = 0.1
 
 class AlgoritmoGeneticoPopulacao:
@@ -23,10 +23,9 @@ class AlgoritmoGeneticoPopulacao:
     while True:
       if self.geracoes <= self.geracoes_max and self.erro > self.erro_min:
         populacao_mutada = self.populacao.mutacao()
-        populacao_crossover = self.populacao.crossover()
-        self.populacao.selecionar(populacao_mutada, populacao_crossover)
+        #populacao_crossover = self.populacao.crossover()
+        self.populacao.selecionar(populacao_mutada, [])
         fitness = self.populacao.top_fitness()
-        #print(ultimo_fitness)
         if fitness > ultimo_fitness:
           self.erro = abs(fitness - ultimo_fitness)
           ultimo_fitness = fitness

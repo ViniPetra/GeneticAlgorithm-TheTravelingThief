@@ -40,17 +40,44 @@ print(individuo_adaptado)
 
 # ind1 = rotas.Rotas(dados=fd.FabricaDados())
 # ind2 = rotas.Rotas(dados=fd.FabricaDados())
-
-# print(ind1.ver_fitness())
-
 # mut = ind1.mutacao()
 # mut2 = ind2.mutacao()
 
-# print(ind1.ver_fitness())
-# print(ind2.ver_fitness())
-
 # ind1.selecionar(mut, mut2)
 
-# print(ind1.ver_fitness())
+# rota_invalida = ['Lagos', 'Ponte-do-Sol', 'Campos', 'Escondidos', 'Porto', 'Leão', 'Santa Paula', 'Riacho de Fevereiro', 'Granada', 'Escondidos', 'Algas', 'Além-do-Mar', 'Foz da Água Quente', 'Guardião']
 
-# print(abs(ind1.ver_fitness()[1] - ind1.ver_fitness()[0]))
+# ind_inv = rota.Rota(dados=fd.FabricaDados(), rota=rota_invalida)
+
+# print(ind_inv.fitness_val)
+
+# while True:
+#     ind = rota.Rota(dados=fd.FabricaDados())
+#     ind = ind.mutacao()
+#     print(f"fitness: {ind.fitness_val}, rota[0]: {ind.rota[0]}")
+#     if ind.fitness_val != float('-inf') and ind.rota[0] != 'Escondidos':
+#         break
+
+
+# while True:
+#     populacao = rotas.Rotas(dados=fd.FabricaDados())
+#     pop = populacao.crossover()
+#     for ind in pop:     
+#         print(f"fitness: {ind.fitness_val}, rota[0]: {ind.rota[0]}")
+#         if ind.fitness_val != float('-inf') and ind.rota[0] != 'Escondidos':
+#             print("Deu merda")
+#             break
+
+# while True:
+#     populacao = rotas.Rotas(dados=fd.FabricaDados())
+#     populacao2 = rotas.Rotas(dados=fd.FabricaDados())
+#     populacao3 = rotas.Rotas(dados=fd.FabricaDados())
+    
+#     populacao.selecionar(populacao2.populacao, populacao3.populacao)
+    
+#     pop = populacao.populacao
+#     for ind in pop:     
+#         print(f"fitness: {ind.fitness_val}, rota[0]: {ind.rota[0]}")
+#         if ind.fitness_val != float('-inf') and ind.rota[0] != 'Escondidos':
+#             print("Deu merda")
+#             break
