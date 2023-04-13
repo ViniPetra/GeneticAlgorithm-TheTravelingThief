@@ -1,22 +1,26 @@
-from algoritmo_genetico import Individuo
 import fabrica_dados as fd
 import random
 
-class Rota(Individuo):
+class Rota():
     #Inicia o individuo com uma rota aleatoria
-    def __init__(self, dados: fd.FabricaDados):
-        self.rota = []
+    def __init__(self, dados: fd.FabricaDados, rota = None):
         self.dados = dados
-        self.fitness_val = 0
-
-        cidades = self.dados.cidades
-        randon_list = random.sample(range(len(cidades)), len(cidades))
-        self.rota.append('Escondidos')
-        for i in range(13):
-            self.rota.append(cidades[randon_list[i]])
+        self.rota = rota
+        if rota == None:
+            self.rota = self.gerar_rota()
+        self.fitness_val = self.fitness()
 
     def __str__(self):
-        return self.rota
+        return ', '.join(self.rota)
+
+    def gerar_rota(self):
+        rota = []
+        cidades = self.dados.cidades
+        randon_list = random.sample(range(len(cidades)), len(cidades))
+        rota.append('Escondidos')
+        for i in range(13):
+            rota.append(cidades[randon_list[i]])
+        return rota
 
     def fitness(self):
         itens = self.dados.itens
@@ -34,10 +38,8 @@ class Rota(Individuo):
         for i in range(len(rota)):
             #Verificar as restrições antes para economizar processamento
             if peso_total > 20:
-                self.fitness_val = float('-inf')
                 return float('-inf') # Retorna -inf caso a rota exceda o limite de peso
             if tempo_total > 72:
-                self.fitness_val = float('-inf')
                 return float('-inf') # Retorna -inf caso a rota exceda o limite de tempo
             if i == 0:
                 continue # Ignora a primeira cidade da rota, que sempre é "Escondidos"
@@ -51,19 +53,14 @@ class Rota(Individuo):
                         valor_total += itens[rota[i]]['valor']
                         peso_total += itens[rota[i]]['peso']
                     else:
-                        self.fitness_val = valor_total - custo_transporte 
                         return valor_total - custo_transporte 
                 except KeyError: 
-                    self.fitness_val = float('-inf')
                     return float('-inf') # Retorna -inf caso a rota não seja válida
-
+    
+    #muda aleatoriamente a ordem de duas cidades
     def mutacao(self):
-        #muda aleatoriamente a ordem de duas cidades
+        rota_mutada = self.rota
         cidades = self.dados.cidades
         randon_list = random.sample(range(len(cidades)), 2)
-        self.rota[randon_list[0]], self.rota[randon_list[1]] = self.rota[randon_list[1]], self.rota[randon_list[0]]
-
-
-# indTeste = Rota(fd.FabricaDados())
-
-# print(indTeste.fitness())
+        rota_mutada[randon_list[0]], rota_mutada[randon_list[1]] = rota_mutada[randon_list[1]], rota_mutada[randon_list[0]]
+        return Rota(self.dados, rota=rota_mutada)
