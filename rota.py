@@ -62,12 +62,8 @@ class Rota(Individuo):
         cidades = self.dados.cidades
         randon_list = random.sample(range(len(cidades)), 2)
         self.rota[randon_list[0]], self.rota[randon_list[1]] = self.rota[randon_list[1]], self.rota[randon_list[0]]
- 
-    def crossover(self):
-        raise NotImplementedError("Implementar")
 
 
+# indTeste = Rota(fd.FabricaDados())
 
-indTeste = Rota(fd.FabricaDados())
-
-print(indTeste.fitness())
+# print(indTeste.fitness())

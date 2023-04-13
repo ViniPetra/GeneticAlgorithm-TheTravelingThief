@@ -1,5 +1,8 @@
-import rota
+import rota, rotas
+import fabrica_dados as fd
 
-ind = rota.Rota()
+pop = rotas.Rotas(fd.FabricaDados())
 
-print(ind.rota)
+pop2 = pop.crossover()
+
+print(len(pop2))
