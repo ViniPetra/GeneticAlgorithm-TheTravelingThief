@@ -1,14 +1,14 @@
 import rotas, algoritmo_genetico, rota
 import fabrica_dados as fd
 
-alg_gen = algoritmo_genetico.AlgoritmoGeneticoPopulacao(rotas.Rotas(fd.FabricaDados()))
+# alg_gen = algoritmo_genetico.AlgoritmoGeneticoPopulacao(rotas.Rotas(fd.FabricaDados()))
 
-individuo_adaptado = alg_gen.executar()
+# individuo_adaptado = alg_gen.executar()
 
-print("\nPrimeiro mais adaptado:")
-print(f"Quantidade de gerações: {alg_gen.qtd_geracoes()}")
-print(f"Erro: {alg_gen.erro_final()}")
-print(individuo_adaptado)
+# print("\nPrimeiro mais adaptado:")
+# print(f"Quantidade de gerações: {alg_gen.qtd_geracoes()}")
+# print(f"Erro: {alg_gen.erro_final()}")
+# print(individuo_adaptado)
 
 #--------------------  TESTES  --------------------
 # rota_teste = ['Escondidos', 'Algas', 'Riacho de Fevereiro', 'Guardião', 'Lagos', 'Santa Paula', 'Foz da Água Quente', 'Porto', 'Campos', 'Além-do-Mar', 'Granada', 'Escondidos', 'Leão', 'Ponte-do-Sol']
