@@ -58,6 +58,7 @@ class Rota():
                         valor_total += itens[rota[i]]['valor']
                         peso_total += itens[rota[i]]['peso']
                     else:
+                        #Se a cidade não tiver item, retorna -inf (só Escondidos não está na lista)
                         return valor_total - custo_transporte 
                 except KeyError: 
                     return float('-inf') # Retorna -inf caso a rota não seja válida
