@@ -13,24 +13,35 @@ class Rotas():
   #retorna uma lista com os individuos cruzados da população
   def crossover(self):
     nova_população = []
-    
+    novas_rotas = []
+
     meio = len(self.populacao)// 2
     
     metade1 = self.populacao[:meio]
     metade2 = self.populacao[meio:]
     
     for i in range(meio):
-      metade_da_rota1 = metade1[i].rota[:len(metade1[i].rota)//2]
-      metade_da_rota2 = metade2[i].rota[len(metade2[i].rota)//2:]
+      # metade_da_rota1 = metade1[i].rota[:len(metade1[i].rota)//2]
+      # metade_da_rota2 = metade2[i].rota[len(metade2[i].rota)//2:]
       
-      metade_da_rota3 = metade1[i].rota[len(metade1[i].rota)//2:]
-      metade_da_rota4 = metade2[i].rota[:len(metade2[i].rota)//2]
-      
-      frankenstein1 = metade_da_rota1 + metade_da_rota2
-      frankenstein2 = metade_da_rota3 + metade_da_rota4
+      # metade_da_rota3 = metade1[i].rota[len(metade1[i].rota)//2:]
+      # metade_da_rota4 = metade2[i].rota[:len(metade2[i].rota)//2]
 
-      nova_população.append(rota.Rota(self.dados, rota=frankenstein1))
-      nova_população.append(rota.Rota(self.dados, rota=frankenstein2))
+      primeira_cidade = [metade1[i].rota[0]]
+
+      metade_da_rota1 = metade1[i].rota[1:len(metade1[i].rota)//2]
+      metade_da_rota2 = metade2[i].rota[len(metade2[i].rota)//2:]
+      metade_da_rota3 = metade1[i].rota[len(metade1[i].rota)//2:]
+      metade_da_rota4 = metade2[i].rota[1:len(metade2[i].rota)//2]
+      
+      frankenstein1 = primeira_cidade + metade_da_rota2 + metade_da_rota1
+      frankenstein2 = primeira_cidade + metade_da_rota4 + metade_da_rota3
+
+      novas_rotas.append(frankenstein1)
+      novas_rotas.append(frankenstein2)
+
+      for rotas in novas_rotas:
+        nova_população.append(rota.Rota(self.dados, rotas))
 
     return nova_população
 
@@ -42,11 +53,20 @@ class Rotas():
       mutados.append(mutado)
     return mutados
       
-  #retorna o fitness do melhor individuo da população e o objeto do individuo
-  def top_fitness(self):
-    lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
-    return lista_ordenada[0].fitness_val
+  #retorna o fitness do melhor individuo da população
+  # def top_fitness(self):
+  #   lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
+  #   return lista_ordenada[0].fitness_val
   
+  
+  # def top_individuo(self):
+  #   lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
+  #   return lista_ordenada[0].fitness_val, lista_ordenada[0].rota
+  
+  def top(self):
+    lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
+    return lista_ordenada[0]
+
   #seleciona os 10 melhores individuos da população
   def selecionar(self, populacao1, populacao2):
     self.populacao = self.populacao + populacao1 + populacao2
@@ -68,9 +88,5 @@ class Rotas():
     for item in self.populacao:
       lista_fit.append(item.fitness_val)
     return lista_fit
-  
-  def top_individuo(self):
-    lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
-    return lista_ordenada[0].fitness_val
-  
+
 

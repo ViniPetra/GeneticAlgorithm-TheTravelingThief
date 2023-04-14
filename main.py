@@ -1,5 +1,6 @@
 import rotas, algoritmo_genetico, rota
 import fabrica_dados as fd
+import requests, json
 
 alg_gen = algoritmo_genetico.AlgoritmoGeneticoPopulacao(rotas.Rotas(fd.FabricaDados()))
 
@@ -81,3 +82,68 @@ print(individuo_adaptado)
 #         if ind.fitness_val != float('-inf') and ind.rota[0] != 'Escondidos':
 #             print("Deu merda")
 #             break
+
+# rota_teste = ['Escondidos', 'Ponte-do-Sol', 'Porto', 'Granada', 'Escondidos', 'Campos', 'Lagos', 'Santa Paula', 'Algas', 'Ponte-do-Sol', 'Lagos', 'Leão', 'Granada', 'Riacho de Fevereiro']
+
+# ind = rota.Rota(dados=fd.FabricaDados())
+
+# print("")
+
+#TESTAR SE O CROSSOVER CHAMA O FITNESS
+
+# pop = rotas.Rotas(dados=fd.FabricaDados())
+
+# pop_cross, teste_fit = pop.crossover()
+
+# newpop = []
+# for item in teste_fit:
+#     newpop.append(rota.Rota(dados=fd.FabricaDados(), rota=item))
+
+
+# for i in range(len(newpop)):
+#     if(pop_cross[i].fitness_val != newpop[i].fitness_val):
+#         print(f"fitness: {pop_cross[i].fitness_val}, rota: {pop_cross[i].rota}")
+#         print(f"fitness: {newpop[i].fitness_val}, rota: {newpop[i].rota}")
+#         print("")
+#     else:
+#         print("Valores iguais")
+
+# teste = ['Escondidos', 'Algas', 'Porto', 'Riacho de Fevereiro', 'Santa Paula', 'Santa Paula', 'Além-do-Mar', 'Escondidos', 'Lagos', 'Campos', 'Leão', 'Santa Paula', 'Campos', 'Riacho de Fevereiro']
+
+# if teste[0] != "Escondidos":
+#     print(float('-inf'))
+
+# if teste.count('Escondidos') != 2:
+#     print(float('-inf'))
+
+# temp_arr = []
+# i = 1
+# while teste[i] != 'Escondidos':
+#     temp_arr.append(teste[i])
+#     i += 1
+
+# if len(temp_arr) != len(set(temp_arr)):
+#     print(float('-inf'))
+
+# ind = rota.Rota(dados=fd.FabricaDados())
+
+# print("--------------------")
+# print(f"fitness: {ind.fitness_val}")
+# print(f"rota: {ind.rota}")
+# print(f"peso: {ind.peso}")
+# print(f"tempo: {ind.tempo_total}")
+# print("--------------------")
+
+#gera novos indivíduos até que um tenha fitness válido mas peso > 20 e tempo >72
+# while True:
+#     ind = rota.Rota(dados=fd.FabricaDados())
+#     print("--------------------")
+#     print(f"fitness: {ind.fitness_val}")
+#     print(f"rota: {ind.rota}")
+#     print(f"peso: {ind.peso}")
+#     print(f"tempo: {ind.tempo_total}")
+#     print("--------------------")
+
+#     if ind.fitness_val != float('-inf') and ind.peso > 20 and ind.tempo_total > 72:
+#         print("Deu merda")
+#         break

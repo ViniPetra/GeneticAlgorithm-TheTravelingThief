@@ -6,12 +6,15 @@ class Rota():
     def __init__(self, dados: fd.FabricaDados, rota = None):
         self.dados = dados
         self.rota = rota
+        self.peso = 0
+        self.tempo_total = 0
         if rota == None:
             self.rota = self.gerar_rota()
         self.fitness_val = self.fitness()
 
     def __str__(self):
-        return ', '.join(self.rota)
+        string = f"fitness: {self.fitness_val}\n rota: {self.rota}\n peso: {self.peso}\n tempo: {self.tempo_total}"
+        return string
 
     def gerar_rota(self):
         rota = []
@@ -32,19 +35,37 @@ class Rota():
         peso_total = 0
         custo_transporte = 0
 
+        #Verifica se a primeira cidade é Escondidos
         if rota[0] != "Escondidos":
             return float('-inf')
         
-        #Verificar se há cidades repetidas na rota sem contar a primeira
-        temp_arr = rota[1:]
+        #Verifica se Escondidos aparece duas vezes
+        if rota.count('Escondidos') != 2:
+            return float('-inf')
+        
+        #cria uma sublista até a primeira ocorrencia de "Escondidos" sem contar a primeira cidade
+        temp_arr = []
+        i = 1
+        while rota[i] != 'Escondidos':
+            temp_arr.append(rota[i])
+            i += 1
+
+        #temp_arr = rota[1:]
+        #Verifica se a sublista possui cidades repetidas
         if len(temp_arr) != len(set(temp_arr)):
+            self.peso = peso_total
+            self.tempo_total = tempo_total
             return float('-inf')
 
         for i in range(len(rota)):
             #Verificar as restrições antes para economizar processamento
             if peso_total > 20:
+                self.peso = peso_total
+                self.tempo_total = tempo_total
                 return float('-inf') # Retorna -inf caso a rota exceda o limite de peso
             if tempo_total > 72:
+                self.peso = peso_total
+                self.tempo_total = tempo_total
                 return float('-inf') # Retorna -inf caso a rota exceda o limite de tempo
             if i == 0:
                 continue # Ignora a primeira cidade da rota, que sempre é "Escondidos"
@@ -58,9 +79,13 @@ class Rota():
                         valor_total += itens[rota[i]]['valor']
                         peso_total += itens[rota[i]]['peso']
                     else:
+                        self.peso = peso_total
+                        self.tempo_total = tempo_total
                         #Se a cidade não tiver item, retorna -inf (só Escondidos não está na lista)
                         return valor_total - custo_transporte 
                 except KeyError: 
+                    self.peso = peso_total
+                    self.tempo_total = tempo_total
                     return float('-inf') # Retorna -inf caso a rota não seja válida
     
     #muda aleatoriamente a ordem de duas cidades com exceção da primeira
