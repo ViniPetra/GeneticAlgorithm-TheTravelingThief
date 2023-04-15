@@ -11,19 +11,20 @@ class AlgoritmoGeneticoPopulacao:
     return self.geracoes
 
   def executar(self):
-    ultimo_fitness = self.populacao.top().fitness_val
+    ultimo_fitness = self.populacao.top()
 
     while True:
       if self.geracoes <= self.geracoes_max:
         populacao_mutada = self.populacao.mutacao()
         populacao_crossover = self.populacao.crossover()
         self.populacao.selecionar(populacao_mutada, populacao_crossover)
-        fitness = self.populacao.top().fitness_val
-        if fitness > ultimo_fitness:
+        fitness = self.populacao.top()
+        if fitness.fitness() > ultimo_fitness.fitness():
           ultimo_fitness = fitness
         self.geracoes += 1
-        if self.geracoes % 5000 == 0:
-          print(f"Geração: {self.geracoes}, Top fitness: {self.populacao.top().fitness_val}")
+        if self.geracoes % 10000 == 0:
+          print(f"Geração: {self.geracoes}\nTop fitness: \n{ultimo_fitness}\n\n")
       else:
         break
-    return self.populacao.top()
+    
+    return ultimo_fitness

@@ -1,4 +1,6 @@
 import rota, rotas, algoritmo_genetico, fabrica_dados as fd
+f = fd.FabricaDados()
+
 
 #-------------------  TESTES  --------------------
 #Fábria de dados  
@@ -23,8 +25,6 @@ import rota, rotas, algoritmo_genetico, fabrica_dados as fd
     #selfs
     # if fitness > ultimo_fitness:
     # break
-
-f = fd.FabricaDados()
 
 # #Verificar a Fábrica de Dados
 # print(f.cidades)
@@ -71,11 +71,113 @@ f = fd.FabricaDados()
 
 # print(ind_teste)
 
-pop = rotas.Rotas(f)
+# pop = rotas.Rotas(f)
 
-mutados = pop.mutacao()
+# mutados = pop.mutacao()
 
-for i in range(len(mutados)):
-    print(f"Mutado {i+1}:")
-    print(mutados[i])
-    print("")
+# for i in range(len(mutados)):
+#     print(f"Mutado {i+1}:")
+#     print(mutados[i])
+#     print("")
+
+
+# rota_teste = ['Escondidos', 'Foz da Água Quente', 'Leão', 'Campos', 'Guardião', 'Riacho de Fevereiro', 'Escondidos', 'Campos', 'Ponte-do-Sol', 'Santa Paula', 'Santa Paula', 'Granada', 'Riacho de Fevereiro']
+# ind_teste = rota.Rota(f, rota = rota_teste)
+
+# print(f"Rota válida: {ind_teste.rota_valida()}")
+# print(f"Valor total: {ind_teste.valor_total()}")
+# print(f"Peso total: {ind_teste.peso_total()}")
+# print(f"Tempo viagem: {ind_teste.calc_tempo_viagem()}")
+# print(f"Tempo roubo: {ind_teste.calc_tempo_roubo()}")
+# print(f"Tempo total: {ind_teste.calc_tempo_total()}")
+# print(f"Custo total: {ind_teste.calc_custo_viagem()}")
+# print(f"Lucro total: {ind_teste.lucro()}")
+
+# pop = rotas.Rotas(f)
+
+# for ind in pop.populacao:
+#     print(ind.fitness())
+#     print("")
+
+# print(ind_teste.fitness_val)
+
+# temp_arr = []
+# i = 1
+# while rota_teste[i] != 'Escondidos':
+#     temp_arr.append(rota_teste[i])
+#     i += 1
+
+# if len(rota_teste) == len(set(rota_teste)):
+#     print("Todas as cidades são únicas")
+
+
+# if(len(temp_arr) == 0):
+#     print("Não há cidades na rota")
+# else:
+#     print(len(temp_arr) == len(set(temp_arr)))
+
+# pop = rotas.Rotas(f)
+
+# # pop_mutada = pop.mutacao()
+
+# pop_cross = pop.crossover()
+
+# # pop_selecionada = pop.selecionar(pop_mutada, pop_cross)
+
+# for ind in pop_cross:
+#     print(ind)
+#     print("")
+
+
+#Cruza duas listas de cidades de forma que o padrão seja o seguinte:
+#1. primeira cidade da primeira lista
+#2. segunda cidade da segunda lista
+#3. terceira cidade da primeira lista
+#4. quarta cidade da segunda lista
+
+# def cruzar(lista1, lista2):
+    
+#     nova_lista1 = []
+#     nova_lista2 = []
+
+#     for i in range(len(lista1)):
+#         if i % 2 == 0:
+#             nova_lista1.append(lista1[i])
+#             nova_lista2.append(lista2[i])
+#         else:
+#             nova_lista1.append(lista2[i])
+#             nova_lista2.append(lista1[i])
+
+#     return nova_lista1, nova_lista2
+
+
+# listaa = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+# listab = ['i', 'j', 'k', 'l', 'm', 'n', 'o', 'p']
+
+# print(cruzar(listaa, listab))
+
+
+# pop = rotas.Rotas(f)
+
+# pop_mutada = pop.mutacao()
+
+# pop_cross = pop.crossover()
+
+# pop.selecionar(pop_mutada, pop_cross)
+
+
+# # for ind in pop_selecionada:
+# #     print(ind)
+# #     print("")
+
+# print(type(pop.populacao))
+# print(type(pop_selecionada))
+
+# alg_gen = algoritmo_genetico.AlgoritmoGeneticoPopulacao(rotas.Rotas(fd.FabricaDados()))
+
+# individuo_adaptado = alg_gen.executar()
+
+# ind_teste = rota.Rota(fd.FabricaDados(), rota = individuo_adaptado.rota)
+
+# print('-----------------')
+# print(ind_teste)
