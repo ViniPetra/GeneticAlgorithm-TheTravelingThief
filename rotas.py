@@ -70,18 +70,17 @@ class Rotas():
   #seleciona os 10 melhores individuos da população
   def selecionar(self, populacao1, populacao2):
     self.populacao = self.populacao + populacao1 + populacao2
-    
-
-    # for item in self.populacao:
-    #   if item.fitness_val != float('-inf') and item.rota[0] != 'Escondidos':
-    #     print(item.rota)
-    #     print(item.fitness_val)
-    #     print(" ")
-        
-    
     lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
     self.populacao = lista_ordenada[:10]
-    
+
+  # #recalcula o fitness de todos os individuos da população e seleciona os 10 melhores
+  # def selecionar(self, populacao1, populacao2): 
+  #   self.populacao = self.populacao + populacao1 + populacao2
+  #   for individuo in self.populacao:
+  #     individuo.fitness_val = individuo.fitness()
+  #   lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
+  #   self.populacao = lista_ordenada[:10] 
+
   #retorna uma lista com os fitness de todos os individuos da população
   def ver_fitness(self):
     lista_fit = []

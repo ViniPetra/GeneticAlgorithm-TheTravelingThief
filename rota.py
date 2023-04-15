@@ -13,7 +13,7 @@ class Rota():
         self.fitness_val = self.fitness()
 
     def __str__(self):
-        string = f"fitness: {self.fitness_val}\n rota: {self.rota}\n peso: {self.peso}\n tempo: {self.tempo_total}"
+        string = f"fitness: {self.fitness_val}\nrota: {self.rota}\npeso: {self.peso}\ntempo: {self.tempo_total}"
         return string
 
     def gerar_rota(self):
@@ -50,7 +50,6 @@ class Rota():
             temp_arr.append(rota[i])
             i += 1
 
-        #temp_arr = rota[1:]
         #Verifica se a sublista possui cidades repetidas
         if len(temp_arr) != len(set(temp_arr)):
             self.peso = peso_total
@@ -78,11 +77,15 @@ class Rota():
                         tempo_total += itens[rota[i]]['tempo']
                         valor_total += itens[rota[i]]['valor']
                         peso_total += itens[rota[i]]['peso']
-                    else:
-                        self.peso = peso_total
-                        self.tempo_total = tempo_total
-                        #Se a cidade não tiver item, retorna -inf (só Escondidos não está na lista)
-                        return valor_total - custo_transporte 
+                    else:   #Se a cidade não tiver item, retorna -inf (só Escondidos não está na lista)
+                        if(peso_total <= 20 and tempo_total <= 72):
+                            self.peso = peso_total
+                            self.tempo_total = tempo_total
+                            return valor_total - custo_transporte 
+                        else:
+                            self.peso = peso_total
+                            self.tempo_total = tempo_total
+                            return float('-inf')
                 except KeyError: 
                     self.peso = peso_total
                     self.tempo_total = tempo_total
