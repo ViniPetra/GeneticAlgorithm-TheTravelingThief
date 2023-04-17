@@ -19,7 +19,7 @@ class AlgoritmoGeneticoPopulacao:
         populacao_crossover = self.populacao.crossover()
         self.populacao.selecionar(populacao_mutada, populacao_crossover)
         fitness = self.populacao.top()
-        if fitness.fitness() > ultimo_fitness.fitness():
+        if fitness.fitness_val > ultimo_fitness.fitness_val:
           ultimo_fitness = fitness
         self.geracoes += 1
         if self.geracoes % 10000 == 0:

@@ -1,43 +1,18 @@
 import rota
-
+import random
 class Rotas():
   #Cria uma população de rotas
-  def __init__(self, dados):
+  def __init__(self, dados, rotas= None):
     self.tamanho = 10
     self.populacao = []
     self.dados = dados
 
-    for i in range(self.tamanho):
-      self.populacao.append(rota.Rota(dados))
-
-  # #retorna uma lista com os individuos cruzados da população
-  # def crossover(self):
-  #   nova_população = []
-  #   novas_rotas = []
-
-  #   meio = len(self.populacao)// 2
-    
-  #   metade1 = self.populacao[:meio]
-  #   metade2 = self.populacao[meio:]
-    
-  #   for i in range(meio):
-  #     primeira_cidade = [metade1[i].rota[0]]
-
-  #     metade_da_rota1 = metade1[i].rota[1:len(metade1[i].rota)//2]
-  #     metade_da_rota2 = metade2[i].rota[len(metade2[i].rota)//2:]
-  #     metade_da_rota3 = metade1[i].rota[len(metade1[i].rota)//2:]
-  #     metade_da_rota4 = metade2[i].rota[1:len(metade2[i].rota)//2]
-      
-  #     frankenstein1 = primeira_cidade + metade_da_rota2 + metade_da_rota1
-  #     frankenstein2 = primeira_cidade + metade_da_rota4 + metade_da_rota3
-
-  #     novas_rotas.append(frankenstein1)
-  #     novas_rotas.append(frankenstein2)
-
-  #     for rotas in novas_rotas:
-  #       nova_população.append(rota.Rota(self.dados, rotas))
-
-  #   return nova_população
+    if rotas is None:
+      for i in range(self.tamanho):
+        self.populacao.append(rota.Rota(dados))
+    else:
+      for i in range(len(rotas)):
+        self.populacao.append(rota.Rota(dados, rotas[i]))
 
   #retorna uma lista com os individuos mutados da população
   def mutacao(self):
@@ -46,22 +21,30 @@ class Rotas():
       mutado = individuo.mutacao()
       mutados.append(mutado)
     return mutados
-
+  
+  # def mutacao(self):
+  #   mutados = []
+  #   for individuo in self.populacao:
+  #     caminho = individuo.rota
+  #     randon_list = random.sample(range(1, len(caminho)), 2)
+  #     caminho[randon_list[0]], caminho[randon_list[1]] = caminho[randon_list[1]], caminho[randon_list[0]]
+  #     mutados.append(rota.Rota(self.dados, caminho))
+  #   return mutados
+  
   #retorna o individuo mais adaptado da população
   def top(self):
-    lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness(), reverse=True)
+    lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
     return lista_ordenada[0]
 
   #seleciona os 10 melhores individuos da população
   def selecionar(self, populacao1, populacao2):
     populacao_total = self.populacao + populacao1 + populacao2
-    lista_ordenada = sorted(populacao_total, key=lambda x: x.fitness(), reverse=True)
+    lista_ordenada = sorted(populacao_total, key=lambda x: x.fitness_val, reverse=True)
     mais_adaptados = lista_ordenada[:10]
     self.populacao = mais_adaptados
-    return mais_adaptados
 
+  #Faz o cruzamento de duas listas
   def cruzar(lista1, lista2):
-      
       nova_lista1 = []
       nova_lista2 = []
 
@@ -75,7 +58,14 @@ class Rotas():
 
       return nova_lista1, nova_lista2
 
-  
+  #Retorna uma lista com os individuos cruzados da população
+  #Funciona assim:
+  # 1 - Divide a população em duas metades
+  # 2 - Para cada metade, cruza os individuos com os individuos da outra metade
+  # 2.1 - Exemplo: metade 1 = [1, 2, 3, 4, 5] e metade 2 = [6, 7, 8, 9, 10]
+  # 2.2 - 1 cruza com 6, 2 cruza com 7, 3 cruza com 8, 4 cruza com 9 e 5 cruza com 10
+  # 2.3 - Resultado: [1, 7, 3, 9, 5] e [6, 2, 8, 4, 10]
+  # 3 - Retorna a nova população
   def crossover(self):
     nova_populacao = []
     novos_individuos = []

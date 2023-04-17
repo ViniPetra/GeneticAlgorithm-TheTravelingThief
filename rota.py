@@ -10,9 +10,11 @@ class Rota():
             self.rota = self.gerar_rota()
         self.peso = 0
         self.tempo_total = 0
+        self.fitness_val = 0
+        self.fitness()
 
     def __str__(self):
-        string = f"fitness: {self.fitness()}\nstatus: {self.status}\nrota: {self.rota}\npeso: {self.peso}\ntempo: {self.tempo_total}"
+        string = f"fitness: {self.fitness_val}\nstatus: {self.status}\nrota: {self.rota}\npeso: {self.peso}\ntempo: {self.tempo_total}"
         return string
 
     def gerar_rota(self):
@@ -27,11 +29,11 @@ class Rota():
 
     #muda aleatoriamente a ordem de duas cidades com exceção da primeira
     def mutacao(self):
-        rota = self.rota
-        randon_list = random.sample(range(1, len(rota)), 2)
-        rota[randon_list[0]], rota[randon_list[1]] = rota[randon_list[1]], rota[randon_list[0]]
-        return Rota(self.dados, rota)
-        
+        novo_rota = self.rota
+        randon_list = random.sample(range(1, len(novo_rota)), 2)
+        novo_rota[randon_list[0]], novo_rota[randon_list[1]] = novo_rota[randon_list[1]], novo_rota[randon_list[0]]
+        novo_individuo = Rota(self.dados, novo_rota)
+        return novo_individuo
 
     #-----------------Funções de fitness-----------------
 
@@ -186,18 +188,23 @@ class Rota():
         #   - Se Escondidos não é a segunda cidade da rota
         #   - Se a rota efetiva possui cidades repetidas
         if self.rota_valida() == False:
+            self.fitness_val = float('-inf')
             return float('-inf')
         
         # Verifica se o peso total da rota é maior que 20
         if self.peso_total() > 20:
             self.status = 'Inválida: Peso total maior que 20'
+            self.fitness_val = float('-inf')
             return float('-inf')
         
         # Verifica se o tempo total da rota é maior que 72
         if self.calc_tempo_total() > 72:
             self.status = 'Inválida: Tempo total maior que 72'
+            self.fitness_val = float('-inf')
             return float('-inf')
         
         # Retorna o valor total - custo total
         self.status = 'Fit'
-        return self.lucro()
+        lucro = self.lucro()
+        self.fitness_val = lucro
+        return lucro

@@ -181,3 +181,51 @@ f = fd.FabricaDados()
 
 # print('-----------------')
 # print(ind_teste)
+
+# presets = [
+#     ['Escondidos', 'Algas', 'Leão', 'Campos', 'Riacho de Fevereiro', 'Leão', 'Além-do-Mar', 'Campos', 'Guardião', 'Santa Paula', 'Riacho de Fevereiro', 'Algas', 'Escondidos', 'Além-do-Mar'],
+#     ['Escondidos', 'Foz da Água Quente', 'Leão', 'Campos', 'Guardião', 'Riacho de Fevereiro', 'Escondidos', 'Campos', 'Ponte-do-Sol', 'Santa Paula', 'Santa Paula', 'Granada', 'Riacho de Fevereiro'],
+#     ['Escondidos', 'Algas', 'Leão', 'Campos', 'Riacho de Fevereiro', 'Leão', 'Além-do-Mar', 'Campos', 'Guardião', 'Santa Paula', 'Riacho de Fevereiro', 'Algas', 'Escondidos', 'Além-do-Mar'],
+#     ['Escondidos', 'Foz da Água Quente', 'Leão', 'Campos', 'Guardião', 'Riacho de Fevereiro', 'Escondidos', 'Campos', 'Ponte-do-Sol', 'Santa Paula', 'Santa Paula', 'Granada', 'Riacho de Fevereiro'],
+#     ['Escondidos', 'Algas', 'Leão', 'Campos', 'Riacho de Fevereiro', 'Leão', 'Além-do-Mar', 'Campos', 'Guardião', 'Santa Paula', 'Riacho de Fevereiro', 'Algas', 'Escondidos', 'Além-do-Mar'],
+# ]
+
+# pop = rotas.Rotas(fd.FabricaDados(), presets)
+
+# for ind in pop.populacao:
+#     print(ind)
+#     print("")
+
+# pop = rotas.Rotas(fd.FabricaDados())
+
+# for ind in pop.populacao:
+#     print(ind)
+#     print("")
+
+# r = ['Escondidos', 'Leão', 'Além-do-Mar', 'Escondidos', 'Escondidos', 'Campos', 'Foz da Água Quente', 'Granada', 'Guardião', 'Riacho de Fevereiro', 'Riacho de Fevereiro', 'Porto', 'Guardião', 'Santa Paula']
+
+# ind_teste = rota.Rota(fd.FabricaDados(), rota = r)
+
+# print(ind_teste)
+
+r = ['Escondidos', 'Foz da Água Quente', 'Riacho de Fevereiro', 'Porto', 'Granada', 'Além-do-Mar', 'Além-do-Mar', 'Escondidos', 'Foz da Água Quente', 'Algas', 'Ponte-do-Sol', 'Granada', 'Guardião', 'Guardião']
+ind_teste = rota.Rota(fd.FabricaDados(), rota = r)
+print(ind_teste)
+print(ind_teste.fitness_val)
+
+#fit 492
+#peso 6
+#tempo 23
+
+# while True:
+#     pop = rotas.Rotas(fd.FabricaDados())
+#     pop_m = pop.mutacao()
+#     pop_c = pop.crossover()
+#     pop.selecionar(pop_m, pop_c)
+
+#     for ind in pop.populacao:
+#         if ind.fitness_val > float("-inf"):
+#             novo_fit = ind.fitness()
+#             if novo_fit != ind.fitness_val:
+#                 print("Erro")
+                
