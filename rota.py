@@ -2,21 +2,21 @@ import fabrica_dados as fd
 import random
 
 class Rota():
-    #Inicia o individuo com uma rota aleatoria
     def __init__(self, dados: fd.FabricaDados, rota = None):
         self.dados = dados
         self.rota = rota
-        if rota == None:
+        if rota == None: #se não for passada uma rota, gera uma aleatória
             self.rota = self.gerar_rota()
         self.peso = 0
         self.tempo_total = 0
         self.fitness_val = 0
-        self.fitness()
+        self.fitness() #calcula e atualiza o fitness_val
 
     def __str__(self):
         string = f"fitness: {self.fitness_val}\nstatus: {self.status}\nrota: {self.rota}\npeso: {self.peso}\ntempo: {self.tempo_total}"
         return string
 
+    #Gera uma rota aleatória
     def gerar_rota(self):
         rota = []
         cidades = self.dados.cidades
@@ -27,16 +27,15 @@ class Rota():
         return rota
     
 
-    #muda aleatoriamente a ordem de duas cidades com exceção da primeira
+    #Muda aleatoriamente a ordem de duas cidades com exceção da primeira
     def mutacao(self):
         novo_rota = self.rota
         randon_list = random.sample(range(1, len(novo_rota)), 2)
         novo_rota[randon_list[0]], novo_rota[randon_list[1]] = novo_rota[randon_list[1]], novo_rota[randon_list[0]]
         novo_individuo = Rota(self.dados, novo_rota)
-        return novo_individuo
+        return novo_individuo #retorna um novo individuo com a rota mutada
 
     #-----------------Funções de fitness-----------------
-
 
     # Verifica se a rota é válida
     def rota_valida(self):
@@ -69,6 +68,7 @@ class Rota():
         
         return True
     
+    # Cria um array com a rota entre os dois "Escondidos"
     def cria_sub_rota(self):
         sub_rota = []
         i = 1
@@ -80,10 +80,7 @@ class Rota():
     # Retorna o valor total obtido na rota
     def valor_total(self):
         itens = self.dados.itens
-
         sub_rota = self.cria_sub_rota()
-
-        # Soma o valor total dos itens da sub-rota
         valor_total = 0
         for cidade in sub_rota:
             if cidade in itens:
@@ -96,10 +93,7 @@ class Rota():
     # Retorna o tempo total da rota
     def peso_total(self):
         itens = self.dados.itens
-
         sub_rota = self.cria_sub_rota()
-
-        # Soma o peso total dos itens da sub-rota
         peso_total = 0
         for cidade in sub_rota:
             if cidade in itens:
@@ -109,7 +103,7 @@ class Rota():
         self.peso = peso_total
         return peso_total
     
-    # Cria uma lista com a rota entre Escondidos e contando ambos
+    # Cria uma lista com a rota entre Escondidos (incluindo ambos)
     def cria_rota_efetiva(self):
         rota_efetiva = []
         i = 1
@@ -124,10 +118,7 @@ class Rota():
     # Retorna o tempo total da rota
     def calc_tempo_viagem(self):
         viagens = self.dados.viagens
-
         rota_efetiva = self.cria_rota_efetiva()
-        
-        # Soma o tempo total das viagens da rota efetiva
         tempo_total = 0
         for i in range(len(rota_efetiva)):
             if i == 0:
@@ -135,7 +126,6 @@ class Rota():
             else:
                 try:
                     tempo_total += viagens[rota_efetiva[i-1]][rota_efetiva[i]]['tempo']
-                    #print(f'{rota_efetiva[i-1]} -> {rota_efetiva[i]}: {viagens[rota_efetiva[i-1]][rota_efetiva[i]]["tempo"]}')
                 except KeyError: 
                     raise Exception(f"Viagem entre '{rota_efetiva[i-1]}' e '{rota_efetiva[i]}' não está na lista de viagens.")
         
@@ -146,23 +136,20 @@ class Rota():
         tempo_roubo = 0
         sub_rota = self.cria_sub_rota()
         for cidade in sub_rota:
-            tempo_roubo += self.dados.itens[cidade]['tempo']
-            #print(f"{self.dados.itens[cidade]['item']}: {self.dados.itens[cidade]['tempo']}")
+            tempo_roubo += self.dados.itens[cidade]['tempo']#print(f"{self.dados.itens[cidade]['item']}: {self.dados.itens[cidade]['tempo']}")
         return tempo_roubo
     
     # Retorna o tempo total da rota
     def calc_tempo_total(self):
         tempo = self.calc_tempo_viagem() + self.calc_tempo_roubo()
         self.tempo_total = tempo
+        print("Tempo total: %f" % tempo)
         return tempo
 
     # Retorna o custo total da rota
     def calc_custo_viagem(self):
         viagens = self.dados.viagens
-
         rota_efetiva = self.cria_rota_efetiva()
-
-        # Soma o custo total das viagens da rota efetiva
         custo_total = 0
         for i in range(len(rota_efetiva)):
             if i == 0:
@@ -204,7 +191,13 @@ class Rota():
             return float('-inf')
         
         # Retorna o valor total - custo total
-        self.status = 'Fit'
-        lucro = self.lucro()
-        self.fitness_val = lucro
-        return lucro
+        # self.status = 'Fit'
+        # lucro = self.lucro()
+        # self.fitness_val = lucro
+        # return lucro
+
+        if self.rota_valida() and self.peso_total() <= 20 and self.calc_tempo_total() <= 72:
+            self.status = 'Fit'
+            lucro = self.lucro()
+            self.fitness_val = lucro
+            return lucro
