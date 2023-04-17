@@ -208,14 +208,13 @@ f = fd.FabricaDados()
 
 # print(ind_teste)
 
-r = ['Escondidos', 'Foz da Água Quente', 'Riacho de Fevereiro', 'Porto', 'Granada', 'Além-do-Mar', 'Além-do-Mar', 'Escondidos', 'Foz da Água Quente', 'Algas', 'Ponte-do-Sol', 'Granada', 'Guardião', 'Guardião']
+r = ['Escondidos', 'Lagos', 'Santa Paula', 'Além-do-Mar', 'Escondidos', 'Algas', 'Porto', 'Santa Paula', 'Granada', 'Ponte-do-Sol', 'Ponte-do-Sol', 'Leão', 'Riacho de Fevereiro', 'Campos']
 ind_teste = rota.Rota(fd.FabricaDados(), rota = r)
 print(ind_teste)
-print(ind_teste.fitness_val)
 
-#fit 492
-#peso 6
-#tempo 23
+#fit 36707
+#peso 20
+#tempo 67
 
 # while True:
 #     pop = rotas.Rotas(fd.FabricaDados())

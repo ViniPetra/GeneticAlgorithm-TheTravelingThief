@@ -21,16 +21,7 @@ class Rotas():
       mutado = individuo.mutacao()
       mutados.append(mutado)
     return mutados
-  
-  # def mutacao(self):
-  #   mutados = []
-  #   for individuo in self.populacao:
-  #     caminho = individuo.rota
-  #     randon_list = random.sample(range(1, len(caminho)), 2)
-  #     caminho[randon_list[0]], caminho[randon_list[1]] = caminho[randon_list[1]], caminho[randon_list[0]]
-  #     mutados.append(rota.Rota(self.dados, caminho))
-  #   return mutados
-  
+
   #retorna o individuo mais adaptado da população
   def top(self):
     lista_ordenada = sorted(self.populacao, key=lambda x: x.fitness_val, reverse=True)
