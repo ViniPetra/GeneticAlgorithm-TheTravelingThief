@@ -29,7 +29,7 @@ class Rota():
 
     #Muda aleatoriamente a ordem de duas cidades com exceção da primeira
     def mutacao(self):
-        novo_rota = self.rota
+        novo_rota = self.rota[:]
         randon_list = random.sample(range(1, len(novo_rota)), 2)
         novo_rota[randon_list[0]], novo_rota[randon_list[1]] = novo_rota[randon_list[1]], novo_rota[randon_list[0]]
         novo_individuo = Rota(self.dados, novo_rota)
@@ -136,14 +136,13 @@ class Rota():
         tempo_roubo = 0
         sub_rota = self.cria_sub_rota()
         for cidade in sub_rota:
-            tempo_roubo += self.dados.itens[cidade]['tempo']#print(f"{self.dados.itens[cidade]['item']}: {self.dados.itens[cidade]['tempo']}")
+            tempo_roubo += self.dados.itens[cidade]['tempo']
         return tempo_roubo
     
     # Retorna o tempo total da rota
     def calc_tempo_total(self):
         tempo = self.calc_tempo_viagem() + self.calc_tempo_roubo()
         self.tempo_total = tempo
-        print("Tempo total: %f" % tempo)
         return tempo
 
     # Retorna o custo total da rota
