@@ -29,10 +29,10 @@ class Rota():
 
     #Muda aleatoriamente a ordem de duas cidades com exceção da primeira
     def mutacao(self):
-        novo_rota = self.rota[:]
-        randon_list = random.sample(range(1, len(novo_rota)), 2)
-        novo_rota[randon_list[0]], novo_rota[randon_list[1]] = novo_rota[randon_list[1]], novo_rota[randon_list[0]]
-        novo_individuo = Rota(self.dados, novo_rota)
+        nova_rota = self.rota[:]
+        randon_list = random.sample(range(1, len(nova_rota)), 2)
+        nova_rota[randon_list[0]], nova_rota[randon_list[1]] = nova_rota[randon_list[1]], nova_rota[randon_list[0]]
+        novo_individuo = Rota(self.dados, nova_rota)
         return novo_individuo #retorna um novo individuo com a rota mutada
 
     #-----------------Funções de fitness-----------------
@@ -190,13 +190,7 @@ class Rota():
             return float('-inf')
         
         # Retorna o valor total - custo total
-        # self.status = 'Fit'
-        # lucro = self.lucro()
-        # self.fitness_val = lucro
-        # return lucro
-
-        if self.rota_valida() and self.peso_total() <= 20 and self.calc_tempo_total() <= 72:
-            self.status = 'Fit'
-            lucro = self.lucro()
-            self.fitness_val = lucro
-            return lucro
+        self.status = 'Fit'
+        lucro = self.lucro() # Valor total - Custo total
+        self.fitness_val = lucro
+        return lucro
