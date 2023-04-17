@@ -208,7 +208,7 @@ f = fd.FabricaDados()
 
 # print(ind_teste)
 
-r = ['Escondidos', 'Lagos', 'Santa Paula', 'Além-do-Mar', 'Escondidos', 'Algas', 'Porto', 'Santa Paula', 'Granada', 'Ponte-do-Sol', 'Ponte-do-Sol', 'Leão', 'Riacho de Fevereiro', 'Campos']
+r = ['Escondidos', 'Riacho de Fevereiro', 'Lagos', 'Além-do-Mar', 'Campos', 'Santa Paula', 'Granada', 'Escondidos', 'Lagos', 'Foz da Água Quente', 'Ponte-do-Sol', 'Além-do-Mar', 'Foz da Água Quente', 'Foz da Água Quente']
 ind_teste = rota.Rota(fd.FabricaDados(), rota = r)
 print(ind_teste)
 
