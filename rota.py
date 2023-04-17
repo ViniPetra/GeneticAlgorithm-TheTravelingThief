@@ -1,5 +1,5 @@
 import fabrica_dados as fd
-import random
+import random, tabulate
 
 class Rota():
     def __init__(self, dados: fd.FabricaDados, rota = None):
@@ -33,7 +33,29 @@ class Rota():
         randon_list = random.sample(range(1, len(nova_rota)), 2)
         nova_rota[randon_list[0]], nova_rota[randon_list[1]] = nova_rota[randon_list[1]], nova_rota[randon_list[0]]
         novo_individuo = Rota(self.dados, nova_rota)
-        return novo_individuo #retorna um novo individuo com a rota mutada
+        return novo_individuo #retorna um novo individuo com a rota mutada  
+    
+    def imprimir(self):
+        cidades_visitadas = self.cria_sub_rota()
+        itens_roubados = []
+        valor_itens = []
+        matriz_dados =[]
+        
+        headers = ['Cidade', 'Item roubado', 'Valor']
+        
+        #Adiciona o item e o valor da cidade em matriz_dados[1]
+        for i in cidades_visitadas:
+            itens_roubados.append(self.dados.itens[i]['item'])
+            valor_itens.append(self.dados.itens[i]['valor'])
+            
+        for i in range(len(cidades_visitadas)):
+            new_row = [cidades_visitadas[i], itens_roubados[i], f'${valor_itens[i]}']
+            matriz_dados.append(new_row)
+            
+        string = f"Fitness: {self.fitness_val}\nStatus: {self.status}\nPeso: {self.peso}Kg\nTempo: {self.tempo_total}h\nRota e itens roubados:"
+        print(string)
+        print(tabulate.tabulate(matriz_dados, headers = headers, tablefmt = 'fancy_grid'))
+        
 
     #-----------------Funções de fitness-----------------
 
