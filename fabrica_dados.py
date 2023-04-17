@@ -50,3 +50,12 @@ class FabricaDados:
                                  'tempo': tempo,
                                  'valor': valor}
         return items
+    
+# Formato dos dados ------------------------------------------------------------
+
+# viagens = { Cidade origem: {Cidade destino: {'tempo': tempo, 'custo': custo}}}
+
+# cidades = [Cidade 1, Cidade 2, Cidade 3, ...]
+
+# itens = {Cidade: {'item': item, 'peso': peso, 'tempo': tempo, 'valor': valor}}
+
