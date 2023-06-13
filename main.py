@@ -7,4 +7,5 @@ individuo_adaptado = alg_gen.executar()
 
 print("\nPrimeiro mais adaptado:")
 print(f"Quantidade de gerações: {alg_gen.qtd_geracoes()}")
-print(individuo_adaptado)
+individuo_adaptado.imprimir()
+alg_gen.plotar()
